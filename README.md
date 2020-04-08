@@ -3,7 +3,7 @@ A simple example connecting trace+log using morgan lib in node.js with Datadog
 
 ## How to use
 
-Before to run this example, you should create a Pipeline in Datadog to Remapper trace_id
+Before to run this example, you should create a Pipeline in Datadog with a processor to remapper trace_id
 
 ![alt](images/pipeline.png)
 
