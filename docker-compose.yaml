@@ -1,0 +1,32 @@
+version: '3'
+services:
+  agent:
+    image: "datadog/agent"
+    container_name: agent
+    environment:
+      - DD_API_KEY=${DD_API_KEY}
+      - DD_APM_ENABLED=true
+      - DD_LOGS_ENABLED=true
+      - DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
+      - DD_PROCESS_AGENT_ENABLED=true
+    ports:
+      - "8126:8126"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+  node:
+    container_name: nodejs-morgan
+    build: ./
+    environment:
+      - DD_SERVICE_NAME=nodejs-morgan
+      - DD_TRACE_AGENT_HOSTNAME=agent
+      - DD_LOGS_INJECTION=true
+      - DD_TRACE_ANALYTICS_ENABLED=true
+      - DD_RUNTIME_METRICS_ENABLED=true
+    ports:
+      - "3000:3000"
+    depends_on:
+      - agent
+    labels:
+      com.datadoghq.ad.logs: '[{"source": "nodejs-custom", "service": "nodejs-morgan"}]'

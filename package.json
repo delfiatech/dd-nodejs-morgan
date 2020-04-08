@@ -1,0 +1,21 @@
+{
+  "requires": true,
+  "lockfileVersion": 1,
+  "dependencies": {
+    "dd-trace": "^0.19.0",
+    "express": "^4.16.3",
+    "morgan": "^1.9.1",
+    "morgan-json": "^1.1.0",
+    "node-uuid": "^1.4.8"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "nodejs-logger",
+  "version": "1.0.0",
+  "description": "node and datadog logger",
+  "main": "server.js",
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC"
+}
