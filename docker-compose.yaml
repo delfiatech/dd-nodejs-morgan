@@ -11,6 +11,7 @@ services:
       - DD_PROCESS_AGENT_ENABLED=true
     ports:
       - "8126:8126"
+      - "8125:8125"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /proc/:/host/proc/:ro
@@ -30,3 +31,18 @@ services:
       - agent
     labels:
       com.datadoghq.ad.logs: '[{"source": "nodejs-custom", "service": "nodejs-morgan"}]'
+  dotnet:
+    container_name: dotnet
+    image: azurewebapp
+    environment:
+      - DD_SERVICE_NAME=dotnet
+      - DD_TRACE_AGENT_HOSTNAME=agent
+      - DD_LOGS_INJECTION=true
+      - DD_TRACE_ANALYTICS_ENABLED=true
+      - DD_RUNTIME_METRICS_ENABLED=true
+    ports:
+      - "5000:80"
+    depends_on:
+      - agent
+    labels:
+      com.datadoghq.ad.logs: '[{"source": "dotnet", "service": "dotnet"}]'
