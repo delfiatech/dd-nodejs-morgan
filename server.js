@@ -27,7 +27,7 @@ morgan.token('span_id', function getSpanId (req) {
 })
 
 app.get('/', function (req, res) {
-  res.send('Hello World correlating logs and traces with Datadog!');
+  res.send('Hello World correlating logs and traces with Datadog!\n');
 });
 
 app.listen(3000, function () {
